@@ -19,7 +19,7 @@ parameters:
 jobs:
   main:
     docker:
-      - image: alpine
+      - image: cimg/base:2020.01
     steps: 
       - checkout
       - run: "echo 'hello, there!'"
@@ -27,7 +27,7 @@ jobs:
           configuration_path: ./metaconfig.yml
   module-a:
     docker:
-      - image: alpine
+      - image: cimg/base:2020.01
     steps:
       - checkout
       - run: "echo 'Hello from module A!!'"
