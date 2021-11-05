@@ -17,9 +17,10 @@ jobs:
             env
             echo "buildAll is $buildAll"
             ./construct-config.sh $buildAll
+            cat ./generated-config.yml
 
       - continuation/continue:
-          configuration_path: ./generated-config.yml
+          configuration_path: generated-config.yml
 
 workflows:
   pre:
