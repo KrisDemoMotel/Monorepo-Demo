@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  main:
+    docker:
+      - image: cimg/base:2020.01
+    steps: 
+      - checkout
+      - run:
+          command: |
+            echo "Default meta config, nothing much to see. Try with build all set to true!"
+
+workflows:
+  default:
+    jobs: 
+      - main
