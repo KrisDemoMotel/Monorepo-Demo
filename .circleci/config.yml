@@ -12,6 +12,7 @@ jobs:
       - run:
           command: |
             echo "Let's check for the buildAll variable."
+            env
             echo "buildAll is $buildAll"
             ./construct-config.sh $buildAll
 
