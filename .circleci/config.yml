@@ -15,6 +15,9 @@ parameters:
   run-b:
     type: boolean
     default: false
+  run-all:
+    type: boolean 
+    default: false
 
 jobs:
   main:
@@ -22,7 +25,6 @@ jobs:
       - image: cimg/base:2020.01
     steps: 
       - checkout
-      - run: "echo 'hello, there!'"
       - continuation/continue:
           configuration_path: ./metaconfig.yml
   module-a:
@@ -51,4 +53,28 @@ workflows:
   pre:
     when: << pipeline.parameters.run-setup >>
     jobs:
-      - main
+      - path-filtering/filter:
+          # Compare files on main
+          base-revision: main
+          # Config for continuation; herein we reuse this config itself
+          config-path: .circleci/config.yml
+          # 3-column space-separated table for mapping; `path-to-test parameter-to-set value-for-parameter` for each row
+          mapping: |
+            .* run-setup false
+            a/.* run-a true
+            b/.* run-b true
+            core.* run-all true
+
+  module-a:
+    when: 
+      or: [ << pipeline.parameters.run-a >>, << pipeline.parameters.run-all >> ]
+    jobs:
+      - module-a
+  module-b:
+    when: 
+      or: [<< pipeline.parameters.run-b >>, << pipeline.parameters.run-all >> ]
+    jobs:
+      - module-b
+      - module-b-post:
+          requires:
+            - module-b
