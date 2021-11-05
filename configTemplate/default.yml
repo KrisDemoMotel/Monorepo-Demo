@@ -1,7 +1,5 @@
 version: 2.1
 
-setup: << pipeline.parameters.run-setup >>
-
 jobs:
   main:
     docker:
