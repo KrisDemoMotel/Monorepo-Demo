@@ -3,21 +3,10 @@ version: 2.1
 setup: << pipeline.parameters.run-setup >>
 
 orbs:
+  continuation: circleci/continuation@0.2.0
   path-filtering: circleci/path-filtering@0.0.2
 
 parameters:
-  run-setup:
-    type: boolean
-    default: true
-  run-a:
-    type: boolean
-    default: false
-  run-b:
-    type: boolean
-    default: false
-  run-all:
-    type: boolean 
-    default: false
 
 jobs:
   main:
@@ -25,8 +14,10 @@ jobs:
       - image: cimg/base:2020.01
     steps: 
       - checkout
+      - run: "env"
       - continuation/continue:
           configuration_path: ./metaconfig.yml
+
   module-a:
     docker:
       - image: cimg/base:2020.01
