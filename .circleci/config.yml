@@ -16,6 +16,9 @@ parameters:
   run-b:
     type: boolean
     default: false
+  run-all:
+    type: boolean
+    default: false
 
 jobs:
   main:
