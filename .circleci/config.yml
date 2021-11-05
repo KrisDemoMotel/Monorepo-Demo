@@ -1,0 +1,54 @@
+version: 2.1
+
+setup: << pipeline.parameters.run-setup >>
+
+orbs:
+  path-filtering: circleci/path-filtering@0.0.2
+
+parameters:
+  run-setup:
+    type: boolean
+    default: true
+  run-a:
+    type: boolean
+    default: false
+  run-b:
+    type: boolean
+    default: false
+
+jobs:
+  main:
+    docker:
+      - image: alpine
+    steps: 
+      - checkout
+      - run: "echo 'hello, there!'"
+      - continuation/continue:
+          configuration_path: ./metaconfig.yml
+  module-a:
+    docker:
+      - image: alpine
+    steps:
+      - checkout
+      - run: "echo 'Hello from module A!!'"
+      - run: cat a/README.md
+
+  module-b:
+    machine: true
+    steps:
+      - checkout
+      - run: "echo 'Hello from module B!'"
+      - run: cat b/README.md
+
+  module-b-post:
+    docker:
+      - image: alpine
+    steps:
+      - run: "echo 'Continuing module B'"
+      - run: env
+
+workflows:
+  pre:
+    when: << pipeline.parameters.run-setup >>
+    jobs:
+      - main

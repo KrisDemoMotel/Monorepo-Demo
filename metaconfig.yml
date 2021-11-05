@@ -1,0 +1,14 @@
+version: 2.1
+
+jobs:
+  main:
+    docker:
+      - image: alpine
+    steps: 
+      - checkout
+      - run: "echo 'hello, there!'"
+
+workflows:
+  main:
+    jobs:
+      - main
