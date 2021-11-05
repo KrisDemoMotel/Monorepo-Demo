@@ -7,6 +7,15 @@ orbs:
   path-filtering: circleci/path-filtering@0.0.2
 
 parameters:
+  run-setup:
+    type: boolean
+    default: true
+  run-a:
+    type: boolean
+    default: false
+  run-b:
+    type: boolean
+    default: false
 
 jobs:
   main:
