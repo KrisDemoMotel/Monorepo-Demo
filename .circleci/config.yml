@@ -13,7 +13,7 @@ jobs:
           command: |
             echo "Let's check for the buildAll variable."
             echo "buildAll is $buildAll"
-            ./construct-config.sh $buildAll;
+            ./construct-config.sh $buildAll
 
       - continuation/continue:
           configuration_path: ./generated-config.yml
