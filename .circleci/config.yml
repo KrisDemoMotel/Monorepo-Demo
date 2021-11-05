@@ -26,8 +26,11 @@ jobs:
       - image: cimg/base:2020.01
     steps: 
       - checkout
-      - run: "echo 'hey'"
-      - run: "env"
+      - run:
+          command: |
+            echo "What a test, you know!"
+            if [ "$buildAll" = "true" ]; then ./configConstructor.sh true; fi;
+
       - continuation/continue:
           configuration_path: ./metaconfig.yml
 

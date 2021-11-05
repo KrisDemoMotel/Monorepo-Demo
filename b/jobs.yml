@@ -1,0 +1,7 @@
+
+  b-main:
+    docker:
+      - image: alpine
+    steps: 
+      - checkout
+      - run: "echo 'Hello from B!'"

@@ -1,14 +1,25 @@
 version: 2.1
 
 jobs:
-  main:
+
+  a-main:
     docker:
       - image: alpine
     steps: 
       - checkout
-      - run: "echo 'hello, there!'"
+      - run: "echo 'Hello from A!'"
+  b-main:
+    docker:
+      - image: alpine
+    steps: 
+      - checkout
+      - run: "echo 'Hello from B!'"
 
 workflows:
-  main:
+
+  a-main:
     jobs:
-      - main
+      - a-main  
+  b-main:
+    jobs:
+      - b-main
