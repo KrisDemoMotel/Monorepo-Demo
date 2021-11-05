@@ -3,4 +3,4 @@ A demo for a mono repo. How exciting!
 
 ## How-to:
 
-Change anything in a or b to trigger their specific workflows, or under "core" to run all workflows.
+In this scenario, we will be looking for a variable called "buildAll" being set to true. If it is, then we will build all. Otherwise, we will use a default configuration.
